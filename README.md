@@ -3,3 +3,4 @@ Translation of a basic MATLAB numerical routine (elementwise matrix squaring) in
 
 
 MATLAB time for 10000 x 10000: 0.183926 seconds
+C++ time for 10000 x 10000: 0.104565 seconds

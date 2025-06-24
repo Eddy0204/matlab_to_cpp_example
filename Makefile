@@ -1,14 +1,19 @@
 CXX = g++
-CXXFLAGS = -O2 -std=c++17
+NVCC = nvcc
+CXXFLAGS = -O2
+OMPFLAGS = -fopenmp
+TARGETS = square_matrix square_matrix_omp square_matrix_cuda
 
-# Targets
-all: square_matrix square_matrix_omp
+all: $(TARGETS)
 
 square_matrix: square_matrix.cpp
-	$(CXX) $(CXXFLAGS) square_matrix.cpp -o square_matrix
+	$(CXX) $(CXXFLAGS) -o $@ $<
 
 square_matrix_omp: square_matrix_omp.cpp
-	$(CXX) $(CXXFLAGS) -fopenmp square_matrix_omp.cpp -o square_matrix_omp
+	$(CXX) $(CXXFLAGS) $(OMPFLAGS) -o $@ $<
+
+square_matrix_cuda: square_matrix.cu
+	$(NVCC) -O2 -o $@ $<
 
 clean:
-	rm -f square_matrix square_matrix_omp
+	rm -f $(TARGETS)
